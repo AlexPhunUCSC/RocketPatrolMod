@@ -118,7 +118,7 @@ class Play extends Phaser.Scene {
         boom.anims.play('explode');
 
         //audio attempt here by inputting the new function
-        this.randomAudio();
+        this.sound.play('sfx_explosion');
 
         boom.on('animationcomplete', () => {
             ship.reset();
