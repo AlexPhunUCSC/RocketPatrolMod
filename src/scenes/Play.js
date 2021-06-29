@@ -111,21 +111,13 @@ class Play extends Phaser.Scene {
         return false;
     }
 
-    //function attempt at creating random audio
-    randomAudio() {
-        soundArray = ['sfx_explosion0', 'sfx_explosion1', 'sfx_explosion2', 'sfx_explosion3', 'sfx_explosion4']
-        var num = Math.floor(Math.random() * soundArray.length);
-        this.sound.play(soundArray[num]);   
-    }
+    //Try creating a new function that randomly chooses from an array of audio explosions
 
     shipExplode(ship) {
         ship.alpha = 0; // hide the ship
         let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0,0);
         boom.anims.play('explode');
-
-        //audio attempt here by inputting the new function
-        randomAudio();
-
+        this.sound.play('sfx_explosion'); //replace this with the function name
         boom.on('animationcomplete', () => {
             ship.reset();
             ship.alpha = 1;
