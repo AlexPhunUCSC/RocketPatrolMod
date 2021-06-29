@@ -14,7 +14,7 @@ class Play extends Phaser.Scene {
         this.add.text(20, 20, "Rocket Patrol Play");
 
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0,0);
-
+        
         // green UI background
         this.add.rectangle(0, borderUISize + borderPadding, 
             game.config.width, 
@@ -43,7 +43,7 @@ class Play extends Phaser.Scene {
             key: 'explode',
             frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 9, first: 0}), 
             frameRate: 30});
-
+        
         this.p1Score = 0;
 
         let scoreConfig = {
@@ -69,6 +69,7 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
     }
 
     update() {
@@ -100,7 +101,7 @@ class Play extends Phaser.Scene {
             this.shipExplode(this.ship01);
         }
     }
-
+    
     checkCollision(rocket, ship) {
         if(rocket.x < ship.x + ship.width &&
            rocket.x + rocket.width > ship.x &&
@@ -111,13 +112,14 @@ class Play extends Phaser.Scene {
         return false;
     }
 
-    //Try creating a new function that randomly chooses from an array of audio explosions
-
     shipExplode(ship) {
         ship.alpha = 0; // hide the ship
         let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0,0);
         boom.anims.play('explode');
-        this.sound.play('sfx_explosion'); //replace this with the function name
+
+        //audio attempt here by inputting the new function
+        this.randomAudio();
+
         boom.on('animationcomplete', () => {
             ship.reset();
             ship.alpha = 1;
