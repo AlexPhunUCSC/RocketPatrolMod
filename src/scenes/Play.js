@@ -107,6 +107,7 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             this.shipExplode(this.ship01);
         }
+        console.log(game.settings.gameTimer - this.clock.elapsed)/1000;
     }
     
     checkCollision(rocket, ship) {
@@ -132,7 +133,7 @@ class Play extends Phaser.Scene {
             ship.alpha = 1;
             boom.destroy();
         });
-        
+        this.clock.elapsed -= 5000;
         // add score and repaint score display
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
